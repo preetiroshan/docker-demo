@@ -15,3 +15,19 @@ Instead of using docker run imgTag, we can tag our image during build stage like
     docker build -t dockerId/nameOfRepo:version
 eg: docker build -t preetir31/redis:latest .
 ![Alt text](image-2.png)
+
+Manual Img Generation with docker commit
+1. Take a image and create a container out of it
+docker run -it alpine sh
+2. Execute commands/install programs within that container
+apk add --update redis
+![Alt text](image-4.png)
+3. Access the running container using docker ps and add a default command to it:
+docker commit -c 'CMD ["redis-server"]' 52e099654d49
+![Alt text](image-3.png)
+
+4. Add a startup command and generate a useful image that can be used in the future
+![Alt text](image-5.png)
+docker run c234d88d5e89de2
+runs a container out of the created image
+
